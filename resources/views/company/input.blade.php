@@ -10,7 +10,7 @@
     <body>
         <div class="container">
             <h1>企業情報入力</h1>
-            <form method="post" action="input" enctype="multipart/form-data" >
+            <form method="post" action="send" enctype="multipart/form-data" >
                 <!-- 入力フォームはここから -->
                 {{ csrf_field() }}
 

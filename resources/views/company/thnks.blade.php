@@ -18,6 +18,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="js/jquery-3.5.1.min.js"></script>
 </head>
 <body>
 
@@ -69,7 +70,7 @@
 
 
 <form method="post" action="send" >
-{{ csrf_field() }}
+{{ csrf_field()}}
 <input type="hidden" name="name" value="{{$name}}">
 <input type="hidden" name="contents" value="{{$contents}}">
 <input type="hidden" name="history" value="{{$history}}">
@@ -78,18 +79,10 @@
 <button type="submit"name="submit">送信する</button>
 
 
-<button type="button" method="post" name="back" id="backbtn"" >入力画面に戻る</button>
+<button type="button" class="btn btn-primary btn-search" method="post" name="back" id="backbtn">入力画面に戻る</button>
 </form>
 
-<script>
-document.getElementById("backbtn").onclick = function(){
 
-<?php 
-unlink($path.$filename);
-?>
-
-}
-</script>
 
     
 </body>
