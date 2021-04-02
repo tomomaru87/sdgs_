@@ -9,8 +9,6 @@ use\App\Http\Requests\companypost;
 
 class companycontroller extends Controller
 {
-
-    //こいつを表示しないと動かなかった。
     public function index()
     {
         return view('company.input');
@@ -32,28 +30,34 @@ class companycontroller extends Controller
 
 
     //送信内容の受け取りとリダイレクトバリデーションをしたい
-    public function company(companypost $request){
-        //ここでランダムなファイル名に変換しimages/companyに画像を保存する。
-        $img=$_FILES['image']['name'];
-        $name = $request->input('name');
-        $contents = $request->input('contents');
-        $history = $request->input('history');
-        $link =$request->input('link');
-        $msg = $request->input('msg');
+    // public function company(companypost $request){
+    //     //ここでランダムなファイル名に変換しimages/companyに画像を保存する。
+    //     $img=$_FILES['image']['name'];
+    //     $name = $request->input('name');
+    //     $contents = $request->input('contents');
+    //     $history = $request->input('history');
+    //     $link =$request->input('link');
+    //     $msg = $request->input('msg');
         
         
-        $path='images/company/';
-        // 既存のファイル名と重複しないように変更
-        $filename = uniqid().$img;
-        move_uploaded_file($_FILES['image']['tmp_name'],$path.$filename);
+    //     $path='images/company/';
+    //     // 既存のファイル名と重複しないように変更
+    //     $filename = uniqid().$img;
+    //     move_uploaded_file($_FILES['image']['tmp_name'],$path.$filename);
 
 
             
-             return view('company.thnks',compact('name','contents','history','link','msg','filename','img','path'));
-                }
+    //          return view('company.thnks',compact('name','contents','history','link','msg','filename','img','path'));
+    //             }
 
+    //画像→フォルダを作成し保存、文章データベースに保存
     public function post(companypost $request){
-        
+        $name = $request->input('name');
+        $img=$_FILES['image']['name'];
+        $path = public_path().'/images/'.$name;
+        mkdir($path);
+        move_uploaded_file($_FILES['image']['tmp_name'],$path.'/'.$img);
+
         //ここでモデルに配列の中身を送付渡す
         company::create($request->only([
         
