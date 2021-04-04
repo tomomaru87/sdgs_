@@ -34,7 +34,7 @@
             <div class="row">
                 <label>メッセージ：<b>{{$companyData->msg}}</b></label>
             </div>
-             
+             <img src=""
             <hr>
             @endforeach
             <!-- ここまで -->

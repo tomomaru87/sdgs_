@@ -22,8 +22,8 @@ Route::get('home','companycontroller@add');
 //会社情報入力関係
 
 Route::get('input','companyController@index');
-Route::post('input','companyController@company');
-Route::post('thnks','companyController@thnks');
+// Route::post('input','companyController@company');
+// Route::post('thnks','companyController@thnks');
 
 
 //送信完了後
