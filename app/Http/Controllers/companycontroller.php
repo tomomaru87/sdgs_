@@ -24,7 +24,7 @@ class companycontroller extends Controller
 
     public function add(){
         //TableSelect::orderby — select 文のソート条件を設定する
-        $items= company::orderby('name')->get();
+        $items= company::orderby('id')->get();
         return view('home')->with('items',$items);
     }
 
@@ -52,12 +52,6 @@ class companycontroller extends Controller
 
     //画像→フォルダを作成し保存、文章データベースに保存
     public function post(companypost $request){
-        $name = $request->input('name');
-        $img=$_FILES['image']['name'];
-        $path = public_path().'/images/'.$name;
-        mkdir($path);
-        move_uploaded_file($_FILES['image']['tmp_name'],$path.'/'.$img);
-
         //ここでモデルに配列の中身を送付渡す
         company::create($request->only([
         
@@ -67,6 +61,16 @@ class companycontroller extends Controller
         'msg',
         'history',
         'created']));
+        
+
+        $content = $request->input('contents');
+        $img=$_FILES['image']['name'];
+        $id= company::where('contents',$content)->value('id');
+
+        $path = public_path().'/images/'.$id;
+        mkdir($path);
+        move_uploaded_file($_FILES['image']['tmp_name'],$path.'/'.$img);
+
 
         //送信完了画面に飛ばす
         return redirect('send');
