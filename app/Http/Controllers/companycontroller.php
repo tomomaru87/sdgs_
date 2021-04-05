@@ -24,8 +24,12 @@ class companycontroller extends Controller
 
     public function add(){
         //TableSelect::orderby — select 文のソート条件を設定する
+
         $items= company::orderby('id')->get();
-        return view('home')->with('items',$items);
+       
+        return view('index')->with([
+            'items'=>$items
+            ]);
     }
 
 
@@ -66,10 +70,9 @@ class companycontroller extends Controller
         $content = $request->input('contents');
         $img=$_FILES['image']['name'];
         $id= company::where('contents',$content)->value('id');
-
         $path = public_path().'/images/'.$id;
         mkdir($path);
-        move_uploaded_file($_FILES['image']['tmp_name'],$path.'/'.$img);
+        move_uploaded_file($_FILES['image']['tmp_name'],$path.'/'.'img.png');
 
 
         //送信完了画面に飛ばす

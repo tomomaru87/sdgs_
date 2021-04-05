@@ -1,22 +1,13 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 //TOPページ
-Route::get('home','companycontroller@add');
+Route::get('index','companycontroller@add');
 
 
 //会社情報入力関係
@@ -50,3 +41,10 @@ Route::post('idea/thnks','ideacontroller@thnks');
 
 Route::post('idea/add','ideacontroller@post');
 Route::get('idea/add','ideacontroller@add');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
